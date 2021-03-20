@@ -1,15 +1,13 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:800);
 
-* {
-    background-color: #222222;
-    overflow: hidden;
-}
-.world {
+
+#world {
 	position: absolute;
     width:100%;
 	height: 100%;
     overflow: hidden;
     margin: 0%;
+    background-color: #222222;
 }
 
 .credits{
