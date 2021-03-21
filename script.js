@@ -13,15 +13,10 @@ function getMat(color){
   // colors
   
   var Colors = {
-    custom_color1 : 0x687864,
-    custom_color2 : 0x31708E,
-    custom_color3 : 0x5085A5,
-    custom_color4 : 0x8FC1E3,
-    custom_color5 : 0xF7F9FB,
-    custom_color6 : 0x0E0816,
-    custom_color7 : 0xA239CA,
-    custom_color8 : 0x4717F6,
-    custom_color9 : 0xE7DFDD
+    custom_color1 : 0xE51E2B,
+    custom_color2 : 0xD4173F,
+    custom_color3 : 0x050B2B,
+    custom_color4 : 0x495B53
   }
   
   
@@ -133,7 +128,8 @@ function getMat(color){
     v.z = radius * Math.sin(phi) + noise;
      
     }
-    var matPlanet = getMat(Colors.custom_color1);
+    
+    var matPlanet = getMat(Colors.custom_color3);
     this.planet = new THREE.Mesh(geomPlanet, matPlanet);
   
     this.ring = new THREE.Mesh();
@@ -191,12 +187,12 @@ function getMat(color){
         console.log(random);
   
     if (random<.25){
-      geom = new THREE.BoxGeometry(s,s,s);
+      geom = new THREE.BoxGeometry(s,s/2,s/3);
     }else if (random < .5){
-      geom = new THREE.CylinderGeometry(0,s,s*2, 4, 1);
+      geom = new THREE.CylinderGeometry(0,s*2,s*3, 4, 1);
   
     }else if (random < .75){
-      geom = new THREE.TetrahedronGeometry(s,2);
+      geom = new THREE.TetrahedronGeometry(s*2,s);
   
     }else{
       geom = new THREE.SphereGeometry(s/2,s/4,s/6);
