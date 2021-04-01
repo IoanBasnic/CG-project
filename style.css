@@ -10,7 +10,7 @@
     background-color: #222222;
 }
 
-.credits{
+.bottom{
   position:absolute;
   width:100%;
   margin: auto;
@@ -24,34 +24,6 @@
   line-height:1.5;
   letter-spacing: 2px;
 }
-.credits a{
-    display: inline-block;
-    position: relative;
-    color: #ffffff;
-    text-decoration: none;
-    font-size: medium;
-    margin-left: 10px;
-  }
-
-.credits a::after {
-    content: '';
-    position: absolute;
-    width: 75%;
-    transform: scaleX(0);
-    height: 0.20em;
-    bottom: 0;
-    left: 0;
-    background: linear-gradient(
-      90deg
-      ,#f4633a,#c800a1,#0033a0);
-    transform-origin: bottom right;
-    transition: transform 0.30s ease-out;
-  }
-  .credits a:hover::after {
-    transform: scaleX(1);
-    transform-origin: bottom left;
-  }
-
 
 
   #menuToggle
