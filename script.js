@@ -4,7 +4,7 @@
 function getMat(color){
     return new THREE.MeshStandardMaterial({
       color:color,
-      roughness:.5,
+      roughness:.7,
       emissive:0x270000,
       shading:THREE.FlatShading
     });
@@ -31,11 +31,11 @@ function getMat(color){
   
   // parameters to customize the planet
   var parameters = {
-    minRadius : 30,
-    maxRadius : 50,
-    minSpeed:.015,
+    minRadius : 50,
+    maxRadius : 100,
+    minSpeed: .01,
     maxSpeed:.025,
-    particles:300,
+    particles:30,
     minSize:.1,
     maxSize:2,
   }
@@ -76,8 +76,8 @@ function getMat(color){
     light = new THREE.DirectionalLight(0xffffff, 1.5);
     light.position.set(200,100,200);
     light.castShadow = true;
-    light.shadow.camera.left = -400;
-    light.shadow.camera.right = 400;
+    light.shadow.camera.left = -800;
+    light.shadow.camera.right = 800;
     light.shadow.camera.top = 400;
     light.shadow.camera.bottom = -400;
     light.shadow.camera.near = 1;
@@ -112,23 +112,16 @@ function getMat(color){
  
   
     var geomPlanet = new THREE.SphereGeometry(20,32,32);
-    
-
-    
      var noise = 5;
      var radius = 20;
     for(var i=0; i<geomPlanet.vertices.length; i++){
       var v = geomPlanet.vertices[i];
-
     theta   = (v.x / 512 * 360 - 180);
     phi     = (v.y / 256 * 180 - 90);
-
     v.x = radius * Math.cos(phi) * Math.cos(theta) + noise;
     v.y = radius * Math.cos(phi) * Math.sin(theta) + noise;
     v.z = radius * Math.sin(phi) + noise;
-     
     }
-    
     var matPlanet = getMat(Colors.custom_color3);
     this.planet = new THREE.Mesh(geomPlanet, matPlanet);
   
@@ -187,7 +180,7 @@ function getMat(color){
         console.log(random);
   
     if (random<.25){
-      geom = new THREE.BoxGeometry(s,s/2,s/3);
+      geom = new THREE.TorusGeometry(s, s/3, s*4, 100)
     }else if (random < .5){
       geom = new THREE.CylinderGeometry(0,s*2,s*3, 4, 1);
   
@@ -248,16 +241,16 @@ function getMat(color){
   function initGUI(){
     var gui = new dat.GUI();
     gui.width = 320;
-    gui.add(parameters, 'minRadius').min(20).max(60).step(1).name('Inner Radius').onChange(function(){
+    gui.add(parameters, 'minRadius').min(10).max(150).step(1).name('Inner Radius').onChange(function(){
       planet.updateParticlesDefiniton();
     });
-    gui.add(parameters, 'maxRadius').min(40).max(100).step(1).name('Outer Radius').onChange(function(){
+    gui.add(parameters, 'maxRadius').min(60).max(300).step(1).name('Outer Radius').onChange(function(){
       planet.updateParticlesDefiniton();
     });
-    gui.add(parameters, 'particles').min(50).max(800).step(1).name('No. Asteroids').onChange(function(){
+    gui.add(parameters, 'particles').min(10).max(800).step(1).name('No. Asteroids').onChange(function(){
       planet.updateParticlesCount();
     });
-    gui.add(parameters, 'maxSpeed').min(.005).max(0.05).step(.001).name('Increase Speed').onChange(function(){
+    gui.add(parameters, 'maxSpeed').min(0.01).max(0.05).step(.001).name('Increase Speed').onChange(function(){
       planet.updateParticlesDefiniton();
     });
     gui.add(parameters, 'maxSize').min(.1).max(5).step(.1).name('Increase Size').onChange(function(){
@@ -265,7 +258,7 @@ function getMat(color){
     });;
 
     var customContainer = document.getElementById('menu');
-  customContainer.appendChild(gui.domElement);
+    customContainer.appendChild(gui.domElement);
   }
   
   function rule3(v,vmin,vmax,tmin, tmax){
