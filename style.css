@@ -10,7 +10,7 @@
     background-color: #222222;
 }
 
-.credit{
+.p-bottom{
   position:absolute;
   width:100%;
   margin: auto;
@@ -24,6 +24,8 @@
   line-height:1.5;
   letter-spacing: 2px;
 }
+
+
 
 
   #menuToggle
